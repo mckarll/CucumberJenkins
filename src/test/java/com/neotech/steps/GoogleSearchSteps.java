@@ -28,6 +28,12 @@ public class GoogleSearchSteps {
 		System.out.println("Count the number of the results");
 	}
 
+	@When("I say what I want to search")
+	public void i_say_what_i_want_to_search() {
+	    System.out.println("Say puppy images");
+	}
+	
+	
 	@Given("I navigated to Google")
 	public void i_navigated_to_google() {
 	    System.out.println("I go to Google Page");
