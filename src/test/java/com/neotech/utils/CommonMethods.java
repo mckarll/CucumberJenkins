@@ -21,9 +21,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.neotech.testbase.BaseClass;
+import com.neotech.testbase.PageInitializer;
 
-public class CommonMethods extends BaseClass {
+public class CommonMethods extends PageInitializer {
 
 	/**
 	 * This method clears the textbox first, then sets it text
@@ -355,7 +355,7 @@ public class CommonMethods extends BaseClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return destination;
 	}
 

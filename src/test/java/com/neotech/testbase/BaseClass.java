@@ -15,7 +15,6 @@ public class BaseClass {
 
 	public static WebDriver driver;
 
-
 	public static void setUp() throws InterruptedException {
 		ConfigsReader.readProperties(Constants.CONFIGURATION_FILEPATH);
 
@@ -40,6 +39,8 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		String website = ConfigsReader.getProperty("url");
 		driver.get(website);
+
+		PageInitializer.initialize();
 	}
 
 	public static void tearDown() {
