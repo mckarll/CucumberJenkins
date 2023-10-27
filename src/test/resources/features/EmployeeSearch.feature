@@ -6,7 +6,7 @@ Feature: Search Employee
     Given user is logged in with valid credentials
     And user navigates to employee list page
     When user enters valid employee id
-    #And clicks on search button
+    And clicks on search button
     Then employee information is displayed
 
   @regression
