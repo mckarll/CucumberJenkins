@@ -19,10 +19,9 @@ import io.cucumber.junit.CucumberOptions;
 		dryRun = false,
 
 		// tags can do the same thing groups on TestNG do
-		tags = "@searchEmployee",
+		tags = "@dataTable",
 
 		monochrome = true
-
 )
 
 public class TestRunner {
