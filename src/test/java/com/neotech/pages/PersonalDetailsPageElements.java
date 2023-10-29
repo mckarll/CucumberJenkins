@@ -13,8 +13,10 @@ public class PersonalDetailsPageElements extends CommonMethods {
 
 	@FindBy(id = "employeeId")
 	public WebElement employeeId;
-	
-	
+
+	@FindBy(id = "pim.navbar.employeeName")
+	public WebElement employeeName;
+
 	@FindBy(id = "firstName")
 	public WebElement firstName;
 
