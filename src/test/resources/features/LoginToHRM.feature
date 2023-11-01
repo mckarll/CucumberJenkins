@@ -17,3 +17,22 @@ Feature: Login Functionality
     And I enter an invalid password
     And I click on the login button
     Then I validate that Invalid Credentials is displayed
+
+  @HW3
+  Scenario Outline: Login using Scenario Outline and Examples Table
+    When user enters login information "<username>" and "<password>"
+    And I click on the login button
+    Then verify that "<employeeName>" is showing
+
+    Examples: 
+      | username   | password       | employeeName |
+      | tonybranch | Tonybranch@123 | Tony Branch  |
+      | bobredex   | Bobredex@123   | Bob Redex    |
+
+
+	@HW3
+  Scenario: Login using DataTable
+    When user enters username and password and clicks on the login button
+      | username   | password       | employeeName |
+      | tonybranch | Tonybranch@123 | Tony Branch  |
+      | bobredex   | Bobredex@123   | Bob Redex    |

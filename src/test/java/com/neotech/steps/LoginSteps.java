@@ -1,10 +1,18 @@
 package com.neotech.steps;
 
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+
 import com.neotech.utils.CommonMethods;
 import com.neotech.utils.ConfigsReader;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+
 
 public class LoginSteps extends CommonMethods {
 
@@ -70,5 +78,70 @@ public class LoginSteps extends CommonMethods {
 			System.out.println("Test failed!!!");
 		}
 	}
+	
+	
+	@When("user enters login information {string} and {string}")
+	public void user_enters_login_information_and(String username, String password) {
+		
+		sendText(login.username, username);
+		sendText(login.password, password);
+	}
+
+	@Then("verify that {string} is showing")
+	public void verify_that_is_showing(String expectedAccountName) {
+
+		String actualName  = dashboard.accountName.getText();
+		
+		Assert.assertEquals("The account name did not match!!!", expectedAccountName, actualName);
+	}
+	
+	@When("user enters username and password and clicks on the login button")
+	public void user_enters_username_and_password_and_clicks_on_the_login_button(DataTable dataTable) {
+
+		//TODO
+		//For every row of the DataTable
+		//send login credentials 
+		//click login
+		//verify
+		//logout --> this is needed to send us back to the login screen and
+					//be ready for the next row
+		
+		//get the data in a list of maps
+		List<Map<String, String>> listOfMaps = dataTable.asMaps();
+		
+		for (Map<String, String> map : listOfMaps)
+		{
+			System.out.println("Testing: " + 
+					map.get("username") + " : " + 
+					map.get("password"));
+			
+			//login
+			sendText(login.username, map.get("username"));
+			sendText(login.password, map.get("password"));
+			
+			click(login.loginButton);
+			
+			wait(1);
+			
+			//take a screenshot
+			
+			
+			//validate
+			String actualAccountName = dashboard.accountName.getText();
+			
+			Assert.assertEquals(map.get("employeeName"), actualAccountName);
+			
+			
+			//logout
+			click(dashboard.accountMenu);
+			click(dashboard.logout);
+			
+		}
+		
+	}
+
+	
+	
+	
 
 }
