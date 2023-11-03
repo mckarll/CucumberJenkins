@@ -188,9 +188,18 @@ public class AddEmployeeSteps extends CommonMethods {
 		click(personalDetails.licExpDate);
 
 		// Date parameter: 2023-08-10
+		// Select year
 		String[] dateParts = expirationDate.split("-");
 		String year = dateParts[0];
+		click(personalDetails.licExpYearInput);
 		clickOnElement(personalDetails.licExpYearOptions, year);
+		wait(2);
+
+		// select month
+		int month = Integer.parseInt(dateParts[1]); // returns 8 as integer
+		click(personalDetails.licExpMonthInput);
+		click(personalDetails.licExpMonthOptions.get(month - 1));
+
 		wait(2);
 	}
 
