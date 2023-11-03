@@ -40,6 +40,15 @@ public class PersonalDetailsPageElements extends CommonMethods {
 	@FindBy(xpath = "//div[@id='nation_code_inputfileddiv']/div/ul/li")
 	public List<WebElement> nationalityOptions;
 
+	@FindBy(xpath = "//input[@id='emp_dri_lice_exp_date']/parent::div//i")
+	public WebElement licExpDate;
+
+	@FindBy(xpath = "//div[@class='select-wrapper picker__select--year']/input")
+	public WebElement licExpYearInput;
+
+	@FindBy(xpath = "//div[@class='select-wrapper picker__select--year']/ul/li")
+	public List<WebElement> licExpYearOptions;
+
 	public PersonalDetailsPageElements() {
 		PageFactory.initElements(driver, this);
 	}

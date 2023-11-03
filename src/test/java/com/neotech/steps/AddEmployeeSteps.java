@@ -184,6 +184,14 @@ public class AddEmployeeSteps extends CommonMethods {
 
 		wait(2);
 
+		// This will show the calendar
+		click(personalDetails.licExpDate);
+
+		// Date parameter: 2023-08-10
+		String[] dateParts = expirationDate.split("-");
+		String year = dateParts[0];
+		clickOnElement(personalDetails.licExpYearOptions, year);
+		wait(2);
 	}
 
 	public void clickOnElement(List<WebElement> list, String value) {
