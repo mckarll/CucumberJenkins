@@ -2,6 +2,10 @@ package com.neotech.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -48,14 +52,36 @@ public class ExcelUtility {
 		for (int row = 1; row < rowNumber; row++) {
 			// iterate over columns
 			for (int col = 0; col < columnNumber; col++) {
-				//what is the value of row in the first iteration??  Ans: 1
-				//is this the first time I am adding info to the data 2D array? Yes
-				//then I want to add the info at index 0, not index 1 ---> row - 1 = 0
+				// what is the value of row in the first iteration?? Ans: 1
+				// is this the first time I am adding info to the data 2D array? Yes
+				// then I want to add the info at index 0, not index 1 ---> row - 1 = 0
 				data[row - 1][col] = cellData(row, col);
 			}
 		}
 
 		// return the 2D array object
 		return data;
+	}
+
+	public static List<Map<String, String>> excelIntoListOfMaps(String filePath, String sheetName) {
+		openExcel(filePath);
+		loadSheet(sheetName);
+
+		List<Map<String, String>> list = new ArrayList<>();
+		for (int row = 1; row < rowCount(); row++) {
+			Map<String, String> rowMap = new LinkedHashMap<>();
+			// iterate over columns: fill the Map
+			for (int col = 0; col < columnCount(row); col++) {
+				String key = cellData(0, col);
+				String value = cellData(row, col);
+				rowMap.put(key, value);
+			}
+
+			// add the Map to the list
+			list.add(rowMap);
+		}
+
+		return list;
+
 	}
 }

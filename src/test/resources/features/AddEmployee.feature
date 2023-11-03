@@ -51,3 +51,8 @@ Feature: Add Employee Feature
       | Yildirim  | F          | Likos    |
       | Emre      | A          | Cinar    |
       | Emilija   | T          | Markovic |
+      
+      
+  @excelDataTable
+  Scenario: Add multiple employees from Excel
+    When user enters employee data from "Employee" excel sheet then save

@@ -55,6 +55,12 @@ public class PersonalDetailsPageElements extends CommonMethods {
 	@FindBy(xpath = "//div[@class='select-wrapper picker__select--month']/ul/li")
 	public List<WebElement> licExpMonthOptions;
 
+	@FindBy(xpath = "//input[@id='emp_dri_lice_exp_date']/..//table/tbody/tr/td")
+	public List<WebElement> licExpDayOptions;
+
+	@FindBy(xpath = "(//button[@type='submit'])[1]")
+	public WebElement detailsSaveBtn;
+
 	public PersonalDetailsPageElements() {
 		PageFactory.initElements(driver, this);
 	}

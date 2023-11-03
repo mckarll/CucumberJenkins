@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import com.neotech.utils.CommonMethods;
+import com.neotech.utils.ExcelUtility;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -187,7 +188,7 @@ public class AddEmployeeSteps extends CommonMethods {
 		// This will show the calendar
 		click(personalDetails.licExpDate);
 
-		// Date parameter: 2023-08-10
+		// Date parameter: 2023-05-10
 		// Select year
 		String[] dateParts = expirationDate.split("-");
 		String year = dateParts[0];
@@ -196,9 +197,14 @@ public class AddEmployeeSteps extends CommonMethods {
 		wait(2);
 
 		// select month
-		int month = Integer.parseInt(dateParts[1]); // returns 8 as integer
+		int month = Integer.parseInt(dateParts[1]); // returns 5 as integer
 		click(personalDetails.licExpMonthInput);
 		click(personalDetails.licExpMonthOptions.get(month - 1));
+		wait(2);
+
+		// select day
+		int day = Integer.parseInt(dateParts[2]);
+		selectCalendarDate(personalDetails.licExpDayOptions, day + "");
 
 		wait(2);
 	}
@@ -215,7 +221,15 @@ public class AddEmployeeSteps extends CommonMethods {
 
 	@Then("I click on Personal Details Save")
 	public void i_click_on_personal_details_save() {
-
+		jsClick(personalDetails.detailsSaveBtn);
+		wait(3);
 	}
 
+	@When("user enters employee data from {string} excel sheet then save")
+	public void user_enters_employee_data_from_excel_sheet_then_save(String sheetName) {
+		String path = System.getProperty("user.dir") + "/src/test/resources/testdata/Excel.xlsx";
+		List<Map<String, String>> excelList = ExcelUtility.excelIntoListOfMaps(path, sheetName);
+
+		// Finish this just like the previous method that uses DataTable
+	}
 }
