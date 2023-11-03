@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 import com.neotech.utils.CommonMethods;
 
@@ -150,6 +151,53 @@ public class AddEmployeeSteps extends CommonMethods {
 			wait(1);
 			click(dashboard.addEmployeeLink);
 		}
+
+	}
+
+	@Then("I am able to modify Employee Details {string}, {string}, {string}, {string}, {string}")
+	public void i_am_able_to_modify_employee_details(String driverLicense, String expirationDate, String smoker,
+			String gender, String nationality) {
+
+		waitForVisibility(personalDetails.personalDetailsForm);
+
+		sendText(personalDetails.licenseNo, driverLicense);
+
+		if (smoker.equals("Yes")) {
+			click(personalDetails.smokerCheck);
+		}
+		wait(2);
+
+		// 1st way
+		click(personalDetails.genderInput);
+//		click(driver.findElement(By.xpath("//span[text()='" + gender + "']")));
+
+		// 2nd way
+		List<WebElement> genderOptions = personalDetails.genderOptions;
+		clickOnElement(genderOptions, gender);
+
+		wait(2);
+
+		click(personalDetails.nationalityInput);
+
+		List<WebElement> nationalityOptions = personalDetails.nationalityOptions;
+		clickOnElement(nationalityOptions, nationality);
+
+		wait(2);
+
+	}
+
+	public void clickOnElement(List<WebElement> list, String value) {
+		wait(1);
+		for (WebElement option : list) {
+			if (option.getText().equals(value)) {
+				click(option);
+				break;
+			}
+		}
+	}
+
+	@Then("I click on Personal Details Save")
+	public void i_click_on_personal_details_save() {
 
 	}
 
