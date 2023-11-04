@@ -342,10 +342,13 @@ public class CommonMethods extends PageInitializer {
 	 * 
 	 * @param fileName
 	 */
-	public static String takeScreenshot(String fileName) {
+	public static byte[] takeScreenshot(String fileName) {
 
 		TakesScreenshot ts = (TakesScreenshot) driver;
 
+		// If you don't want the screenshot to be saved, you can comment this part
+		////////////////////////////////
+		// Create a file and store it in our computer
 		File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
 		String destination = Constants.SCREENSHOT_FILEPATH + fileName + getTimeStamp() + ".png";
@@ -355,8 +358,11 @@ public class CommonMethods extends PageInitializer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		////////////////////////////////
 
-		return destination;
+		// Create a byte[] and return it to be attached to the report
+		byte[] picBytes = ts.getScreenshotAs(OutputType.BYTES);
+		return picBytes;
 	}
 
 	/**

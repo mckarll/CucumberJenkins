@@ -16,13 +16,24 @@ import io.cucumber.junit.CucumberOptions;
 
 		// if true, it does not run the java classes. Only checks the feature files
 		// if they are glued to some java code
-		dryRun = true,
+		dryRun = false,
 
 		// tags can do the same thing groups on TestNG do
+		tags = "@smoke",
 
-		tags = "@excelDataTable",
-
-		monochrome = true)
+		monochrome = true,
+		
+		plugin = {
+				// Prints the gherkin steps to the console
+				"pretty",
+				
+				// Creates and saves the basic html report on the target folder
+				"html:target/cucumber-default-report.html",
+				
+				// Stores every step of the execution to a json file
+				"json:target/cucumber.json"
+				}
+		)
 
 public class TestRunner {
 
