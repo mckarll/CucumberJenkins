@@ -230,6 +230,47 @@ public class AddEmployeeSteps extends CommonMethods {
 		String path = System.getProperty("user.dir") + "/src/test/resources/testdata/Excel.xlsx";
 		List<Map<String, String>> excelList = ExcelUtility.excelIntoListOfMaps(path, sheetName);
 
-		// Finish this just like the previous method that uses DataTable
+		
+		for (Map<String, String> employee : excelList)
+		{
+			String fname = employee.get("FirstName");
+			String lname = employee.get("LastName");
+			String user = employee.get("Username");
+			String pass = employee.get("Password");
+			
+			
+			System.out.println(fname + " " + lname + " " + user + " " + pass);
+			
+			sendText(addEmployee.firstName, fname);
+			sendText(addEmployee.lastName, lname);
+			selectDropdown(addEmployee.location, "London Office");
+			
+			jsClick(addEmployee.loginDetailsToggle);
+			
+			sendText(addEmployee.username, user);
+			sendText(addEmployee.password, pass);
+			sendText(addEmployee.confirmPassword, pass);
+			
+			
+			click(addEmployee.saveButton);
+			
+			waitForVisibility(personalDetails.personalDetailsForm);
+			
+			//Assertion
+			String expectedText = fname + " " + lname;
+			String actualText = personalDetails.employeeName.getText();
+			
+			
+			Assert.assertEquals("Employee is NOT added", expectedText, actualText);
+			
+			//here we need to follow step/steps to go at the start of the next test case
+			click(dashboard.addEmployeeLink);
+		}
+		
+		
+		
+		
+		
+		
 	}
 }
