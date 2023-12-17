@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		features = "src/test/resources/features/",
 		glue = "com.neotech.steps",
-		dryRun = false,
+		dryRun = true,
 		tags = "@excelDataTable",
 		monochrome = true,
 		
